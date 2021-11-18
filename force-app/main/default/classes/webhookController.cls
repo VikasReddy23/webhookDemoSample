@@ -28,7 +28,7 @@ global with sharing class webhookController {
         //System.debug('acc::::',bB.toString());
         update accUpdate;*/
         account a = new account();
-        a.Name = ps!=null?ps.name:'';
+        a.Name = '';
         a.Description = ps!=null?ps.email:'';
         try{
         insert a;}
