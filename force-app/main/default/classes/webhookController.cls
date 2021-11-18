@@ -3,6 +3,7 @@ global with sharing class webhookController {
     @HttpPost
     global static void webhookController() {
 
+        list<account>accUpdate = new list<account>();
         RestRequest request = RestContext.request;
         RestResponse response = RestContext.response;
         Blob bB = request.requestBody;
@@ -10,11 +11,12 @@ global with sharing class webhookController {
         wrapperWebhook wWh;
         
         system.debug(bB.toString());
-        account acc = new account();
-        acc.Id ='0015j000009oNmkAAE';
+        list<account> accList = [select name,id,description from account where Id ='0015j000009oNmkAAE'];
+        for(account acc:accList){
         acc.Description= bB.toString();
+        accUpdate.add(acc);}
         //System.debug('acc::::',bB.toString());
-        update acc;
+        update accUpdate;
         response.statusCode = 200;
         response.responseBody = Blob.valueOf(JSON.serialize(new SFDCResponse('got','thanks') ));
         //System.debug('acc::::', acc);
