@@ -13,7 +13,7 @@ global with sharing class webhookController {
         system.debug(bB.toString());
         list<account> accList = [select name,id,description from account where Id ='0015j000009oNmkAAE'];
         for(account acc:accList){
-        acc.Description= bB.toString();
+        acc.Description= request.requestBody.toString();
         accUpdate.add(acc);}
         //System.debug('acc::::',bB.toString());
         update accUpdate;
