@@ -28,8 +28,8 @@ global with sharing class webhookController {
         //System.debug('acc::::',bB.toString());
         update accUpdate;*/
         account a = new account();
-        a.Name = '';
-        a.Description = ps!=null?ps.email:'';
+        a.Name = ps!=null?ps.name:'';
+        a.Description = request.requestBody.toString();
         try{
         insert a;}
         catch(Exception e){
