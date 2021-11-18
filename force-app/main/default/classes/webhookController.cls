@@ -4,6 +4,7 @@ global with sharing class webhookController {
     global static void webhookController() {
         RestRequest request = RestContext.request;
         RestResponse response = RestContext.response;
+        system.debug(response);
 
     }
 
