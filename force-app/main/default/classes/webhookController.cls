@@ -6,6 +6,12 @@ global with sharing class webhookController {
         RestResponse response = RestContext.response;
         Blob bB = request.requestBody;
         system.debug(bB.toString());
+        account acc;
+        acc.Name= bB.toString();
+
+        System.debug('acc::::',bB.toString());
+        insert acc;
+        System.debug('acc::::',acc);
 
     }
 
