@@ -42,11 +42,11 @@ global with sharing class webhookController {
     }
 
     global class SFDCResponse{
-        global string response;
-        global string message;
-        global SFDCResponse(string response,string message){
-            response = response;
-            message = message;
+         string response;
+         string message;
+        global SFDCResponse(string response1,string message1){
+            response = response1;
+            message = message1;
         }
     }
     global class pusher{
