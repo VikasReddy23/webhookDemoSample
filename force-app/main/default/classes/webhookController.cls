@@ -9,7 +9,7 @@ global with sharing class webhookController {
         JSONParser parser = JSON.createParser(request.requestBody.toString());
         wrapperWebhook wWh;
         
-        //system.debug(bB.toString());
+        system.debug(bB.toString());
         account acc = new account();
         acc.Id ='0015j000009oNmkAAE';
         acc.Description= bB.toString();
@@ -17,10 +17,18 @@ global with sharing class webhookController {
         update acc;
         response.statusCode = 200;
         response.responseBody = Blob.valueOf(JSON.serialize(new SFDCResponse('got','thanks') ));
-        System.debug('acc::::',acc);
+        //System.debug('acc::::', acc);
 
     }
 
+    global class SFDCResponse{
+        global string response;
+        global string message;
+        global SFDCResponse(string response,string message){
+            response = response;
+            message = message;
+        }
+    }
     global class wrapperWebhook{
         global string responseValue;
         global wrapperWebhook(string responseValue){
