@@ -29,7 +29,12 @@ global with sharing class webhookController {
         account a = new account();
         a.Name = ps!=null?ps.name:'';
         a.Description = ps!=null?ps.email:'';
-        insert a;
+        try{
+        insert a;}
+        catch(Exception e){
+            System.debug('logLevel' +e.getMessage());
+        }
+        system.debug(a);
         response.statusCode = 200;
         response.responseBody = Blob.valueOf(JSON.serialize(new SFDCResponse('got','thanks')));
         //System.debug('acc::::', acc);
