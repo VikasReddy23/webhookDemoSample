@@ -12,7 +12,7 @@ global with sharing class webhookController {
         JSONParser parser = JSON.createParser(request.requestBody.toString());
         pusher ps;
         
-        //system.debug(bB.toString());
+        system.debug('bolb Vaue ::::'+bB.toString());
 
         while(parser.nextToken() !=null){
             if(parser.getText() == 'pusher'){
