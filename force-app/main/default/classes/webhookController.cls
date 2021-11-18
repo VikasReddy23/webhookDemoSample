@@ -8,12 +8,19 @@ global with sharing class webhookController {
         RestResponse response = RestContext.response;
         Blob bB = request.requestBody;
         JSONParser parser = JSON.createParser(request.requestBody.toString());
-        wrapperWebhook wWh;
+        pusher ps;
         
         system.debug(bB.toString());
+
+        while(parser.nextToken()!=null){
+            if(parser.getText() == 'pusher'){
+                parser.nextToken();
+                ps = (pusher)parser.readValueAs(pusher.class);
+            }
+        }
         list<account> accList = [select name,id,description from account where Id ='0015j000009oNmkAAE'];
         for(account acc:accList){
-        acc.Description= request.requestBody.toString();
+        acc.Description= ps!=null?ps.name:''+ ps!=null?ps.email:'';
         accUpdate.add(acc);}
         //System.debug('acc::::',bB.toString());
         update accUpdate;
@@ -31,10 +38,11 @@ global with sharing class webhookController {
             message = message;
         }
     }
-    global class wrapperWebhook{
-        global string responseValue;
-        global wrapperWebhook(string responseValue){
-            responseValue = responseValue;
+    global class pusher{
+        global string name;global string email;
+        global pusher(string name,string email){
+            name = name;email=email;
+
         }
         
     }
