@@ -18,7 +18,7 @@ global with sharing class webhookController {
             if(parser.getText() == 'pusher'){
                 parser.nextToken();
                 ps = (pusher)parser.readValueAs(pusher.class);
-                System.debug('ps' +ps);
+                System.debug('ps1' +ps);
             }
         }
         /*list<account> accList = [select name,id,description from account where Id ='0015j000009oNmkAAE'];
