@@ -33,16 +33,17 @@ global with sharing class webhookController {
         a.Name = ps!=null?ps.name:'';
         //a.Description = exce1;
         try{
-        insert a;}
-        catch(Exception e){
-            System.debug('logLevel' +e.getMessage());
-            exce = e.getMessage();
-        }
+        insert a;
         system.debug(a);
         response.statusCode = 200;
-        response.responseBody = Blob.valueOf(JSON.serialize(new SFDCResponse('got','thanks')));
+        response.responseBody = Blob.valueOf(JSON.serialize(new SFDCResponse('got','thanks')));}
+        catch(Exception e){
+        System.debug('logLevel' +e.getMessage());
+        exce = e.getMessage();
         response.statusCode = 401;
         response.responseBody = Blob.valueOf(JSON.serialize(new SFDCResponse('failed',exce)));
+        }
+
         //Syst,em.debug('acc::::', acc);
 
     }
