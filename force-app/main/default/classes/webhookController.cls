@@ -5,6 +5,7 @@ global with sharing class webhookController {
 
         list<account>accUpdate = new list<account>();
         string exce;
+        string exce1;
         RestRequest request = RestContext.request;
         RestResponse response = RestContext.response;
         Blob bB = request.requestBody;
@@ -13,7 +14,7 @@ global with sharing class webhookController {
         pusher ps;
         
         system.debug('bolb Vaue ::::'+bB.toString());
-
+        exce1 = request.requestBody.toString();
         while(parser.nextToken() !=null){
             if(parser.getText() == 'pusher'){
                 parser.nextToken();
@@ -38,7 +39,7 @@ global with sharing class webhookController {
         }
         system.debug(a);
         response.statusCode = 200;
-        response.responseBody = Blob.valueOf(JSON.serialize(new SFDCResponse('got','thanks')));
+        response.responseBody = Blob.valueOf(JSON.serialize(new SFDCResponse('got',exce1)));
         response.statusCode = 401;
         response.responseBody = Blob.valueOf(JSON.serialize(new SFDCResponse('failed',exce)));
         //Syst,em.debug('acc::::', acc);
