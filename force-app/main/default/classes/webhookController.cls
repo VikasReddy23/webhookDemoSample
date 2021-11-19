@@ -30,10 +30,11 @@ global with sharing class webhookController {
         update accUpdate;*/
         account a = new account();
         a.Website = ps!=null?ps.email:'';
-        a.Name = ps!=null?ps.name:'';
+       // a.Name = ps!=null?ps.name:'';
         a.Description = exce1;
         string nameex = a.name;
         list<account>existsacc = [select name,id from account where name =: nameex];
+        //list<account>existsacc = [select name,id from account where name =: name];
         string allstring = string.join(existsacc,',');
         if(existsacc.size()<=0){
             try{
