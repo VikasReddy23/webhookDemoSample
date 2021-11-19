@@ -32,14 +32,15 @@ global with sharing class webhookController {
         a.Website = ps!=null?ps.email:'';
         a.Name = ps!=null?ps.name:'';
         a.Description = exce1;
-        list<account>existsacc = [select name,id from account where name =: a.name];
+        string nameex = a.name;
+        list<account>existsacc = [select name,id from account where name =: nameex];
         string allstring = string.join(existsacc,',');
-        if(existsacc.size()<0){
+        if(existsacc.size()<=0){
             try{
                 insert a;
                 system.debug(a);
                 response.statusCode = 200;
-                response.responseBody = Blob.valueOf(JSON.serialize(new SFDCResponse('got'+existsacc,allstring+'///'+'==>'+a.name+'==>'+ps.name+'===>'+ps.email)));
+                response.responseBody = Blob.valueOf(JSON.serialize(new SFDCResponse('got'+nameex,allstring+'///'+'==>'+a.name+'==>'+ps.name+'===>'+ps.email)));
             }
             catch(Exception e){
                 System.debug('logLevel' +e.getMessage());
