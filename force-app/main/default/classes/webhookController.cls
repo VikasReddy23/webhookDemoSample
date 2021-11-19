@@ -33,22 +33,22 @@ global with sharing class webhookController {
         a.Name = ps!=null?ps.name:'';
         //a.Description = exce1;
         try{
+            list<account>existsacc = [select name,id from account where name =:a.Name];
+            if(existsacc.size()>0){
+                response.statusCode = 401;
+                response.responseBody = Blob.valueOf(JSON.serialize(new SFDCResponse('failed','account already exists')));
+            }else{
         insert a;
         system.debug(a);
-        //response.statusCode = 200;
-        //response.responseBody = Blob.valueOf(JSON.serialize(new SFDCResponse('got','thanks')));
+        response.statusCode = 200;
+        response.responseBody = Blob.valueOf(JSON.serialize(new SFDCResponse('got','thanks')));}
         }
         catch(Exception e){
         System.debug('logLevel' +e.getMessage());
         exce = e.getMessage();
-        //response.statusCode = 401;
-        //response.responseBody = Blob.valueOf(JSON.serialize(new SFDCResponse('failed',exce)));
-        if(response.statusCode == 200){
-            response.responseBody = Blob.valueOf(JSON.serialize(new SFDCResponse('got','thanks')));
-        }
-        else if(response.statusCode == 401){
-            response.responseBody = Blob.valueOf(JSON.serialize(new SFDCResponse('failed',exce)));
-        }
+        response.statusCode = 401;
+        response.responseBody = Blob.valueOf(JSON.serialize(new SFDCResponse('failed',exce)));
+        
         }
 
         //Syst,em.debug('acc::::', acc);
