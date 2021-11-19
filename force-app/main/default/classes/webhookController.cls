@@ -30,7 +30,7 @@ global with sharing class webhookController {
         update accUpdate;*/
         account a = new account();
         a.Name = ps!=null?ps.name:'';
-        a.Description = request.requestBody.toString();
+        //a.Description = request.requestBody.toString();
         try{
         insert a;}
         catch(Exception e){
