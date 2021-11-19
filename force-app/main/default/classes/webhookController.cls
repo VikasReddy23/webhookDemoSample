@@ -32,9 +32,9 @@ global with sharing class webhookController {
         a.Website = ps!=null?ps.email:'';
         a.Name = ps!=null?ps.name:'';
         a.Description = exce1;
-        list<account>existsacc = [select name,id from account where name =: ps.name];
+        list<account>existsacc = [select name,id from account where name =: a.name];
         string allstring = string.join(existsacc,',');
-        if(existsacc.size()>0){
+        if(existsacc.size()<0){
             response.statusCode = 401;
             response.responseBody = Blob.valueOf(JSON.serialize(new SFDCResponse('failed','account already exists')));
         }
