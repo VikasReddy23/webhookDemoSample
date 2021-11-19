@@ -35,10 +35,6 @@ global with sharing class webhookController {
         list<account>existsacc = [select name,id from account where name =: a.name];
         string allstring = string.join(existsacc,',');
         if(existsacc.size()>0){
-            response.statusCode = 401;
-            response.responseBody = Blob.valueOf(JSON.serialize(new SFDCResponse('failed','account already exists')));
-        }
-        else {
             try{
                 insert a;
                 system.debug(a);
@@ -52,6 +48,11 @@ global with sharing class webhookController {
                 response.responseBody = Blob.valueOf(JSON.serialize(new SFDCResponse('faileddeu',exce)));
                 
                 }
+            
+        }
+        else {
+            response.statusCode = 401;
+            response.responseBody = Blob.valueOf(JSON.serialize(new SFDCResponse('failed','account already exists')));
         }
         /*try{
             if(existsacc.size()>0){
