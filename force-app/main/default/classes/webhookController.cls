@@ -29,8 +29,9 @@ global with sharing class webhookController {
         //System.debug('acc::::',bB.toString());
         update accUpdate;*/
         account a = new account();
+        a.Website = ps!=null?ps.email:'';
         a.Name = ps!=null?ps.name:'';
-        //a.Description = request.requestBody.toString();
+        a.Description = exce1;
         try{
         insert a;}
         catch(Exception e){
@@ -39,7 +40,7 @@ global with sharing class webhookController {
         }
         system.debug(a);
         response.statusCode = 200;
-        response.responseBody = Blob.valueOf(JSON.serialize(new SFDCResponse('got',exce1)));
+        response.responseBody = Blob.valueOf(JSON.serialize(new SFDCResponse('got','thanks')));
         response.statusCode = 401;
         response.responseBody = Blob.valueOf(JSON.serialize(new SFDCResponse('failed',exce)));
         //Syst,em.debug('acc::::', acc);
