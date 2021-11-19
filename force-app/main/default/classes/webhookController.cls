@@ -33,7 +33,7 @@ global with sharing class webhookController {
         a.Name = ps!=null?ps.name:'';
         a.Description = exce1;
         list<account>existsacc = [select name,id from account where name =:ps.name];
-        if(existsacc.size>0){
+        if(existsacc.size()>0){
             response.statusCode = 401;
             response.responseBody = Blob.valueOf(JSON.serialize(new SFDCResponse('failed','account already exists')));
         }
@@ -48,7 +48,7 @@ global with sharing class webhookController {
                 System.debug('logLevel' +e.getMessage());
                 exce = e.getMessage();
                 response.statusCode = 401;
-                response.responseBody = Blob.valueOf(JSON.serialize(new SFDCResponse('failed',exce)));
+                response.responseBody = Blob.valueOf(JSON.serialize(new SFDCResponse('faileddeu',exce)));
                 
                 }
         }
