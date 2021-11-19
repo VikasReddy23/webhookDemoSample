@@ -31,7 +31,7 @@ global with sharing class webhookController {
         account a = new account();
         a.Website = ps!=null?ps.email:'';
         a.Name = ps!=null?ps.name:'';
-        a.Description = exce1;
+        //a.Description = exce1;
         try{
         insert a;}
         catch(Exception e){
